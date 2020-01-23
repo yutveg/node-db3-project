@@ -45,12 +45,28 @@ function update(changes, id) {
     });
 }
 
-function remove(id) {
-  const removedScheme = findById(id);
+async function remove(id) {
+  const removed = await findById(id);
   return db("schemes")
     .where({ id })
     .del()
     .then(res => {
-      return removedScheme;
+      return removed;
     });
 }
+
+// function remove(id) {
+//   return findById(id)
+//     .select()
+//     .then(res => {
+//       if (res === null) return null;
+//       else {
+//         return db("schemes")
+//           .where({ id })
+//           .del()
+//           .then(result => {
+//             return res;
+//           });
+//       }
+//     });
+// }
